@@ -1,3 +1,5 @@
+local markdownlint_config = vim.fn.stdpath("config") .. "/opts/markdownlint.jsonc"
+
 return {
   {
     "mfussenegger/nvim-jdtls",
@@ -5,12 +7,6 @@ return {
       jdtls = function(opts)
         opts.settings = {
           java = {
-            format = {
-              enabled = true,
-              settings = {
-                url = "/home/mihili/.dotfiles/.config/nvim/lua/config/java-formatter.xml",
-              },
-            },
             inlayHints = {
               parameterNames = {
                 enabled = "all",
@@ -25,9 +21,13 @@ return {
   {
     "stevearc/conform.nvim",
     opts = {
+      default_format_opts = {
+        timeout_ms = 10000,
+      },
       formatters_by_ft = {
         cpp = { "clang_format" },
         c = { "clang_format" },
+        groovy = { "npm-groovy-lint" },
       },
       formatters = {
         clang_format = {
@@ -36,6 +36,12 @@ return {
             "--fallback-style=none",
             "--assume-filename=" .. os.getenv("HOME") .. "/.clang-format",
           },
+        },
+        ["markdownlint-cli2"] = {
+          prepend_args = { "--config", markdownlint_config },
+        },
+        ["npm-groovy-lint"] = {
+          args = { "--format", "--no-insight", "$FILENAME" },
         },
       },
     },

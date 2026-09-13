@@ -3,3 +3,11 @@
 -- Add any additional options here
 
 vim.opt.colorcolumn = { "100", "120" }
+vim.filetype.add({
+  extension = {
+    jenkinsfile = "groovy",
+  },
+  pattern = {
+    ["[Jj]enkinsfile.*"] = "groovy",
+  },
+})
