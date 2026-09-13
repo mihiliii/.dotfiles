@@ -20,7 +20,7 @@ sudo pacman -Syu
 # Install packages
 
 ## Essentials
-sudo pacman -S --needed --noconfirm git vim base-devel stow github-cli zoxide ttf-jetbrains-mono-nerd
+sudo pacman -S --needed --noconfirm git vim base-devel stow github-cli zoxide ttf-jetbrains-mono-nerd-basic
 
 ## Install lazyvim and its dependencies
 sudo pacman -S --needed --noconfirm neovim wl-clipboard fzf lazygit fd ast-grep ripgrep luarocks nodejs npm lynx
