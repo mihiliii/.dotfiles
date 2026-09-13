@@ -20,11 +20,11 @@ sudo pacman -Syu
 # Install packages
 
 ## Essentials
-sudo pacman -S --needed --noconfirm git vim base-devel stow github-cli zoxide ttf-jetbrains-mono-nerd-basic
+sudo pacman -S --needed --noconfirm git vim base-devel stow github-cli zoxide ttf-jetbrains-mono-nerd-basic zsh which
 
 ## Install lazyvim and its dependencies
 sudo pacman -S --needed --noconfirm neovim wl-clipboard fzf lazygit fd ast-grep ripgrep luarocks nodejs npm lynx
-sudo npm install -g neovim
+sudo npm install -g neovim npm-groovy-lint prettier
 
 ## Install yazi file explorer and starship prompt
 sudo pacman -S --needed --noconfirm yazi starship
@@ -34,12 +34,20 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 source "$HOME/.cargo/env"
 rustup component add rust-analyzer
 
+## Install discord
+sudo pacman -S --needed --noconfirm discord
+
 # Setting up config files
 
+## Removing old neovim config installation
 rm -rf ~/.config/nvim
 rm -rf ~/.local/share/nvim
 rm -rf ~/.local/state/nvim
 rm -rf ~/.cache/nvim
 
+## Using git stow to update config files
 stow -d "$DOTFILES_DIR" -t "$HOME" --adopt .
 git -C "$DOTFILES_DIR" checkout -- .
+
+## Change default shell to zsh
+sudo chsh -s "$(which zsh)" "$USER"
