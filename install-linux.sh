@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -e
 
 # Update system
@@ -9,10 +10,6 @@ sudo pacman -Syu
 
 ## Essentials
 sudo pacman -S --needed --noconfirm git vim base-devel stow github-cli zoxide ttf-jetbrains-mono-nerd
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-rm -rf yay
 
 ## Install lazyvim and its dependencies
 sudo pacman -S --needed --noconfirm neovim wl-clipboard fzf lazygit fd ast-grep ripgrep luarocks nodejs npm lynx
