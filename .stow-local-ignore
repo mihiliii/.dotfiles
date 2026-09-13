@@ -18,3 +18,5 @@ _darcs
 \.bzrtags
 
 CLAUDE\.md
+install-linux.sh
+install-macos.sh
