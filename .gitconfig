@@ -1,7 +1,7 @@
 [init]
 	defaultBranch = main
 [credential]
-	helper = /opt/homebrew/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [user]
 	name = mihiliii
 	email = 115306746+mihiliii@users.noreply.github.com
