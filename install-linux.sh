@@ -15,7 +15,7 @@ fi
 
 # Update system
 
-sudo pacman -Syu
+sudo pacman -Syu --noconfirm
 
 # Install packages
 
