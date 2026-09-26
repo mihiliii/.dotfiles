@@ -1,5 +1,17 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# This script ends with `git checkout -- .` in the dotfiles repo, which
+# discards ANY uncommitted changes there (not just files stow touches).
+# Refuse to run on a dirty tree so we never clobber work in progress.
+if [ -n "$(git -C "$DOTFILES_DIR" status --porcelain)" ]; then
+  echo "error: $DOTFILES_DIR has uncommitted changes." >&2
+  echo "Commit or stash them before running this script." >&2
+  exit 1
+fi
 
 # Install Homebrew if missing
 
@@ -21,11 +33,7 @@ brew install --cask font-jetbrains-mono-nerd-font
 
 ## Install lazyvim and its dependencies
 brew install neovim fzf lazygit fd ast-grep ripgrep luarocks node lynx
-npm install -g neovim
-mv ~/.config/nvim{,.bak}
-mv ~/.local/share/nvim{,.bak}
-mv ~/.local/state/nvim{,.bak}
-mv ~/.cache/nvim{,.bak}
+npm install -g neovim npm-groovy-lint prettier
 
 ## Install yazi file explorer and starship prompt
 brew install yazi starship
@@ -37,4 +45,15 @@ rustup component add rust-analyzer
 
 # Setting up config files
 
-stow -d "$(dirname "${BASH_SOURCE[0]}")" -t "$HOME" .
+## Removing old neovim config installation
+rm -rf ~/.config/nvim
+rm -rf ~/.local/share/nvim
+rm -rf ~/.local/state/nvim
+rm -rf ~/.cache/nvim
+
+## Using git stow to update config files
+stow -d "$DOTFILES_DIR" -t "$HOME" --adopt .
+git -C "$DOTFILES_DIR" checkout -- .
+
+## Change default shell to zsh
+sudo chsh -s "$(which zsh)" "$USER"

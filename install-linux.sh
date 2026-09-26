@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -eo pipefail
 
@@ -33,9 +33,6 @@ sudo pacman -S --needed --noconfirm yazi starship
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 source "$HOME/.cargo/env"
 rustup component add rust-analyzer
-
-## Install discord
-sudo pacman -S --needed --noconfirm discord
 
 # Setting up config files
 
