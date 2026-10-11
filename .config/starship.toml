@@ -16,7 +16,6 @@ $directory$git_branch $character
 """
 
 right_format = """
-$hostname\
 $c\
 $cpp\
 $rust\
@@ -108,7 +107,7 @@ truncation_symbol = ".../"
 format = '[$path]($style)'
 
 [cmd_duration]
-min_time = 0
+min_time = 10
 format = '[](bold fg:surface0)[󰪢 $duration](bold bg:surface0 fg:peach)[](bold fg:surface0)'
 
 [nodejs]
